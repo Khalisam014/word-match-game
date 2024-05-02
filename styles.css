@@ -1,0 +1,147 @@
+/*
+
+ */
+ .grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px;
+  height: 40vh;
+}
+
+.word-card, .definition-card {
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.word-card:hover {
+  background-color: #f0f0f0;
+}
+
+.word-card.selected {
+  background-color: #add8e6;
+}
+
+.definition-card {
+  background-color: #f5f5f5;
+}
+
+.definition-card:hover{
+  background-color: #f0f0f0;
+}
+
+.error {
+  color: red;
+}
+
+body {
+  font-family: "Helvetica", "Verdana", sans-serif;
+  text-align: center;
+  font-size: 12pt;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.waviy {
+  text-transform: uppercase;
+  font-size: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.waviy {
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.waviy .letter {
+  display: inline-block;
+  font-size: 50px;
+  color: #020202;
+  text-transform: uppercase;
+  animation: flip 4s infinite;
+  margin-right: 50px;
+}
+
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg)
+  }
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: line-through;
+
+}
+
+#rules{
+  height: 100vh;
+}
+
+#rules p {
+  text-transform: uppercase;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#details-bar {
+  font-size: 30px;
+  margin-bottom: 50px;
+  text-decoration: underline;
+}
+
+button {
+  background-color: #0a0a0a;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #f5ebe8;
+}
+
+#artworkContainer img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#artworkContainer p {
+  text-align: center;
+  margin-top: 5px;
+}
+
+#feedback {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+
+
