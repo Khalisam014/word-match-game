@@ -1,7 +1,13 @@
 /*
-
- */
- .grid {
+Name: Sama Khalid
+Date: April 18, 2024
+Section: CSE 154 AD
+This is the styles.css page for my portfolio of web
+development. It has a white background with a title that flips.
+The title is also black. There is a lot of white space. It has
+a grid that is very game like. It is interactive.
+*/
+.grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
@@ -29,7 +35,7 @@
   background-color: #f5f5f5;
 }
 
-.definition-card:hover{
+.definition-card:hover {
   background-color: #f0f0f0;
 }
 
@@ -91,7 +97,7 @@ h2 {
 
 }
 
-#rules{
+#rules {
   height: 100vh;
 }
 

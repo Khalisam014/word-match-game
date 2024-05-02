@@ -7,16 +7,13 @@
 
   window.addEventListener("load", init);
 
-  /**
-   *
-   */
   window.addEventListener("load", init);
   let totalMatches = 0;
-  let gameEnded = false;
   let selectedWords = [];
 
   /**
-   *
+   * This functio is in charge initiating the game. It also
+   * populates the list of words in a grid format.
    */
   function init() {
     id("startGameButton").addEventListener("click", startGame);
@@ -24,11 +21,13 @@
   }
 
   /**
-   *
-   * @returns
+   * This function is in charge of making sure the user
+   * selects four words, it hides the start button annd the intial
+   * 4x4 grid.
+   * @returns - nothing
    */
   function startGame() {
-    if (selectedWords.length !== 4) {
+    if (selectedWords.length !== 4) { // check if you can use this
       displayError("Please select exactly 4 words.");
       return;
     }
@@ -39,7 +38,9 @@
   }
 
   /**
-   *
+   * This function is in charge of populating the list of words
+   * that will be displayed on a 4x4 grid. It appends each word
+   * to the container.
    */
   function populateWordGrid() {
     const words = ["leasing", "brobdingnagian", "quixotic", "lugubrious", "Pulchritude",
@@ -58,8 +59,10 @@
   }
 
   /**
-   *
-   * @param {*} card
+   * This function is in charge of showing the cards are being
+   * selected. If there are more than four words it wont let you
+   * select it.
+   * @param {*} card - the card that is being selected
    */
   function toggleWordSelection(card) {
     if (!card.classList.contains('selected') && selectedWords.length < 4) {
@@ -73,8 +76,9 @@
   }
 
   /**
-   *
-   * @param {*} words
+   *  This function is in charge of fetching the defintions
+   *  of the 16 selected words.
+   * @param {*} words - the words that are selected
    */
   function fetchDefinitions(words) {
     id("cardContainer").classList.remove("hidden");
@@ -99,9 +103,10 @@
 
 
   /**
-   *
-   * @param {*} word
-   * @param {*} definition
+   *  This function is in charge of displaying the word and
+   *  definition in a grid form.
+   * @param {*} word - the word selected by the user
+   * @param {*} definition - the definition of the word
    */
   function displayWordAndDefinition(word, definition) {
     const container = id("cardContainer");
@@ -128,8 +133,12 @@
   }
 
   /**
-   *
-   * @param {*} card
+   *  This function is in charge of checking if the
+   *  two cards the user selects is a match. If it is a
+   *  match then they will recieve a message saying that
+   *  they are correct. If they get it wrong then a message is
+   *  displayed saying that it is incorrect.
+   * @param {*} card - the cards that are selected
    */
   function attemptMatch(card) {
     const container = id("cardContainer");
@@ -164,8 +173,10 @@
   }
 
   /**
-   *
-   * @param {*} container
+   * This function is in charge of shuffling the cards so they
+   * aren't next to each other making it more challenging.
+   * @param {*} container - the grid that contains the cards and
+   * defintions of the words.
    */
   function shuffleCards(container) {
     for (let i = container.children.length; i >= 0; i--) {
@@ -197,7 +208,8 @@
   }
 
   /**
-   *
+   * This function is in charge of decrementing
+   * the timer and updating the display.
    */
   function startTimer() {
     let timeLeft = 30;
@@ -214,11 +226,13 @@
   }
 
   /**
-   *
+   *  This function is in charge of taking care of the end of the
+   *  game. When the user finsishes the game before the time is up
+   *  they get an image of mario and if they don't finish in time then
+   *  and image of bowser gets displayed with messages.
    * @param {*} success
    */
   function gameOver(success) {
-    gameEnded = true;
     id("cardContainer").style.display = 'none';
     const feedback = id("feedback");
     const artworkContainer = id("artworkContainer");
@@ -234,8 +248,9 @@
   }
 
   /**
-   *
-   * @param {*} characterName
+   * This function is in charge of fetching the amiibo character.
+   * @param {*} characterName - either mario or bowser depending
+   * if the user won or lost.
    */
   function fetchAmiiboCharacter(characterName) {
     const baseUrl = "https://www.amiiboapi.com/api/amiibo/";
@@ -247,7 +262,7 @@
   }
 
   /**
-   *
+   *  This function is in charge of diplaying the amiibo character.
    * @param {*} imgUrl
    */
   function displayAmiiboCharacter(imgUrl) {
@@ -260,7 +275,8 @@
   }
 
    /**
-   *
+   *  This function is a status check, testing edge cases
+   *  and makes sure everything is functioning correctly.
    * @param {*} response
    * @returns
    */
@@ -278,26 +294,6 @@
    */
   function id(selector) {
     return document.getElementById(selector);
-  }
-
-  /**
-   * Retrieves the first element from the DOM that matches
-   * the specified CSS selector
-   * @param {string} selector - the CSS selector to match against elements in DOM
-   * @returns {Element|null} The first element of the selector
-   */
-  function qs(selector) {
-    return document.querySelector(selector);
-  }
-
-  /**
-   * Retrieves all elements from the DOM that match the specified
-   * CSS selectors
-   * @param {string} selector - the CSS selector to match against elements in DOM
-   * @returns {NodeList} all the elements that match the selector
-   */
-  function qsa(selector) {
-    return document.querySelectorAll(selector);
   }
 
   /**
