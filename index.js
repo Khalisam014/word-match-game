@@ -222,9 +222,9 @@
     remainingSeconds = timerElement.textContent;
     console.log(remainingSeconds);
     const timerId = setInterval(() => {
-      if (remainingSeconds <= 0 || totalMatches === 4) {
+      if (remainingSeconds <= 0 || totalMatches === FOUR) {
         clearInterval(timerId);
-        gameOver(totalMatches === 4);
+        gameOver(totalMatches === FOUR);
       } else {
         remainingSeconds -= 1;
         timerElement.textContent = remainingSeconds;
