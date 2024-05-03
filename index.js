@@ -15,6 +15,7 @@
   window.addEventListener("load", init);
   let totalMatches = 0;
   let selectedWords = [];
+  let remainingSeconds = 30;
   const FOUR = 4;
   const ONE_SECOND = 1000;
 
@@ -217,15 +218,17 @@
    * the timer and updating the display.
    */
   function startTimer() {
-    let timeLeft = 30;
     const timerElement = id('time');
     const timerId = setInterval(() => {
-      if (timeLeft <= 0 || totalMatches === FOUR) {
+      if (remainingSeconds <= 0) {
         clearInterval(timerId);
-        gameOver(totalMatches === FOUR);
+        gameOver(totalMatches === FOUR)
       } else {
-        timeLeft -= 1;
-        timerElement.textContent = timeLeft;
+        if (totalMatches === FOUR) {
+          gameOver(totalMatches === FOUR);
+        }
+        remainingSeconds -= 1;
+        timerElement.textContent = remainingSeconds;
       }
     }, ONE_SECOND);
   }
@@ -280,9 +283,9 @@
   }
 
   /**
-   *  This function is a status check, testing edge cases
-   *  and makes sure everything is functioning correctly.
-   * @param {*} response -
+   * If response.ok is false and error is thrown
+   * otherwise the response object is returned.
+   * @param {*} response - object from the fetch call
    * @returns - returns response object
    */
   function statusCheck(response) {
