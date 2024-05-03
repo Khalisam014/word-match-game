@@ -285,7 +285,7 @@
    * If response.ok is false and error is thrown
    * otherwise the response object is returned.
    * @param {*} response - object from the fetch call
-   * @returns - returns response object
+   * @returns {*} - returns response object
    */
   function statusCheck(response) {
     if (!response.ok) {
