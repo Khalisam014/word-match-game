@@ -16,6 +16,7 @@
   let totalMatches = 0;
   let selectedWords = [];
   const FOUR = 4;
+  const ONE_SECOND = 1000;
 
   /**
    * This functio is in charge initiating the game. It also
@@ -26,7 +27,7 @@
     populateWordGrid();
   }
 
-   /**
+  /**
    * This function is in charge of making sure the user
    * selects four words, it hides the start button annd the intial
    * 4x4 grid.
@@ -157,7 +158,7 @@
         alrSelected.remove();
 
         totalMatches++;
-        if (totalMatches === 4) {  ///maybe make a function for it (checkIfFour)
+        if (totalMatches === FOUR) {
           gameOver(true);
         }
         displayFeedback('Correct match!', false);
@@ -169,7 +170,7 @@
           alrSelected.classList.remove('incorrect', 'selected');
           card.classList.remove('incorrect', 'selected');
           displayFeedback('Incorrect, try again!', true);
-        }, 1000);
+        }, ONE_SECOND);
       }
     } else {
       card.classList.add('selected');
@@ -189,8 +190,8 @@
   }
 
   /**
-   *
-   * @param {*} message
+   * Handles the errors displayed
+   * @param {*} err - the message that is displayed when an error occurs
    */
   function handleError(err) {
     displayFeedback(err, true);
@@ -212,14 +213,14 @@
   }
 
   /**
-   * This function is in charge of decrementing
-   * the timer and updating the display.
+  * This function is in charge of decrementing
+  * the timer and updating the display.
   */
   function startTimer() {
     let timeLeft = 30;
     const timerElement = id('time');
     const timerId = setInterval(() => {
-      if (timeLeft <= 0 || totalMatches === FOUR) {
+      if (timeLeft <= 0 && totalMatches === FOUR) {
         clearInterval(timerId);
         gameOver(totalMatches === FOUR);
       } else {
@@ -234,7 +235,7 @@
    *  game. When the user finsishes the game before the time is up
    *  they get an image of mario and if they don't finish in time then
    *  and image of bowser gets displayed with messages.
-   * @param {*} success
+   * @param {*} success - if the cards were all matched before the time ran out
    */
   function gameOver(success) {
     id("card-container").style.display = 'none';
@@ -251,7 +252,7 @@
     }
   }
 
-   /**
+  /**
    * This function is in charge of fetching the amiibo character.
    * @param {*} characterName - either mario or bowser depending
    * if the user won or lost.
@@ -278,13 +279,13 @@
     container.classList.remove("hidden");
   }
 
-   /**
+  /**
    *  This function is a status check, testing edge cases
    *  and makes sure everything is functioning correctly.
    * @param {*} response
    * @returns
    */
-   function statusCheck(response) {
+  function statusCheck(response) {
     if (!response.ok) {
       throw Error("Error in request: " + response.statusText);
     }
