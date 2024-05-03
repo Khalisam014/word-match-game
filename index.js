@@ -257,14 +257,14 @@
       } else {
         fetchAmiiboCharacter("Bowser");
       }
-      characterButton.classList.add('hidden')
+      characterButton.classList.add('hidden');
     });
     artworkContainer.appendChild(characterButton);
     artworkContainer.classList.remove('hidden');
     artworkContainer.classList.add('visible-flex');
     feedback.classList.remove('hidden');
     feedback.classList.add('visible-block');
-}
+  }
 
   /**
    * This function is in charge of fetching the amiibo character.
