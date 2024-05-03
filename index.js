@@ -267,8 +267,8 @@
   }
 
   /**
-   *  This function is in charge of diplaying the amiibo character.
-   * @param {*} imgUrl
+   * This function is in charge of diplaying the amiibo character.
+   * @param {*} imgUrl - the image url
    */
   function displayAmiiboCharacter(imgUrl) {
     const container = id("artwork-container");
@@ -283,7 +283,7 @@
    *  This function is a status check, testing edge cases
    *  and makes sure everything is functioning correctly.
    * @param {*} response -
-   * @returns {} -
+   * @returns - returns response object
    */
   function statusCheck(response) {
     if (!response.ok) {
