@@ -239,19 +239,32 @@
    * @param {*} success - if the cards were all matched before the time ran out
    */
   function gameOver(success) {
-    id("card-container").style.display = 'none';
+    id("card-container").classList.add('hidden');
     const feedback = id("feedback");
     const artworkContainer = id("artwork-container");
-    artworkContainer.style.display = 'block';
-
+    artworkContainer.innerHTML = '';
     if (success) {
       feedback.textContent = 'Congratulations! You matched all words correctly!';
-      fetchAmiiboCharacter("Mario - Wedding");
     } else {
       feedback.textContent = 'Time up! Try again.';
-      fetchAmiiboCharacter("bowser");
     }
-  }
+    let characterButton = gen('button');
+    characterButton.textContent = "Show Character";
+    characterButton.id = "show-character-btn";
+    characterButton.addEventListener("click", function() {
+      if (success) {
+        fetchAmiiboCharacter("Mario - Wedding");
+      } else {
+        fetchAmiiboCharacter("Bowser");
+      }
+      characterButton.classList.add('hidden')
+    });
+    artworkContainer.appendChild(characterButton);
+    artworkContainer.classList.remove('hidden');
+    artworkContainer.classList.add('visible-flex');
+    feedback.classList.remove('hidden');
+    feedback.classList.add('visible-block');
+}
 
   /**
    * This function is in charge of fetching the amiibo character.

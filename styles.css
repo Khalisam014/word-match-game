@@ -50,7 +50,7 @@ body {
   font-size: 12pt;
 }
 
-.title, .waviy, h2, #rules p, #artwork-container {
+.title, .waviy, h2, #rules p, #artwork-container, .visible-flex {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,4 +133,12 @@ button:hover {
 #feedback {
   margin-top: 20px;
   font-size: 18px;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible-block {
+  display: block;
 }
