@@ -7,32 +7,35 @@
 
   window.addEventListener("load", init);
 
+  /**
+   *
+   */
   window.addEventListener("load", init);
   let totalMatches = 0;
   let selectedWords = [];
+  const FOUR = 4;
 
   /**
    * This functio is in charge initiating the game. It also
    * populates the list of words in a grid format.
    */
   function init() {
-    id("startGameButton").addEventListener("click", startGame);
+    id("start-button").addEventListener("click", startGame);
     populateWordGrid();
   }
 
-  /**
+   /**
    * This function is in charge of making sure the user
    * selects four words, it hides the start button annd the intial
    * 4x4 grid.
-   * @returns - nothing
    */
   function startGame() {
-    if (selectedWords.length !== 4) { // check if you can use this
-      displayError("Please select exactly 4 words.");
+    if (selectedWords.length !== FOUR) {
+      handleError("Please select exactly 4 words.");
       return;
     }
-    id("wordSelectionContainer").style.display = 'none';
-    id("startGameButton").style.display = 'none';
+    id("word-selection-container").style.display = 'none';
+    id("start-button").style.display = 'none';
     fetchDefinitions(selectedWords);
     startTimer();
   }
@@ -46,7 +49,7 @@
     const words = ["leasing", "brobdingnagian", "quixotic", "lugubrious", "Pulchritude",
                    "Maverick","sardonic", "Facetious", "Bombastic", "Easy", "Computer",
                    "Unilateral", "Mango", "Rhythm", "Privilege", "Conscientious"];
-    const container = id("wordSelectionContainer");
+    const container = id("word-selection-container");
     words.forEach(word => {
       let card = gen("div");
       card.textContent = word;
@@ -65,7 +68,7 @@
    * @param {*} card - the card that is being selected
    */
   function toggleWordSelection(card) {
-    if (!card.classList.contains('selected') && selectedWords.length < 4) {
+    if (!card.classList.contains('selected') && selectedWords.length < FOUR) {
       selectedWords.push(card.textContent);
       card.classList.add('selected');
     } else if (card.classList.contains('selected')) {
@@ -81,8 +84,8 @@
    * @param {*} words - the words that are selected
    */
   function fetchDefinitions(words) {
-    id("cardContainer").classList.remove("hidden");
-    id("cardContainer").innerHTML = '';
+    id("card-container").classList.remove("hidden");
+    id("card-container").innerHTML = '';
 
     let fetches = words.map(word => {
       return fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
@@ -92,12 +95,12 @@
           let definition = data[0].meanings[0].definitions[0].definition;
           displayWordAndDefinition(word, definition);
         })
-        .catch(err => displayError(`Failed to fetch definition for ${word}: ${err}`));
+        .catch(err => handleError(`Failed to fetch definition for ${word}: ${err}`));
     });
 
     // got from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
     Promise.all(fetches).then(() => {
-      shuffleCards(id("cardContainer"));
+      shuffleCards(id("card-container"));
     });
   }
 
@@ -109,7 +112,7 @@
    * @param {*} definition - the definition of the word
    */
   function displayWordAndDefinition(word, definition) {
-    const container = id("cardContainer");
+    const container = id("card-container");
     let wordCard = gen("div");
     wordCard.textContent = word;
     wordCard.className = "word-card";
@@ -141,7 +144,7 @@
    * @param {*} card - the cards that are selected
    */
   function attemptMatch(card) {
-    const container = id("cardContainer");
+    const container = id("card-container");
     const alrSelected = container.querySelector('.selected');
     if (alrSelected && alrSelected !== card) {
     // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
@@ -188,8 +191,8 @@
    *
    * @param {*} message
    */
-  function displayError(message) {
-    displayFeedback(message, true);
+  function handleError(err) {
+    displayFeedback(err, true);
   }
 
   /**
@@ -210,14 +213,14 @@
   /**
    * This function is in charge of decrementing
    * the timer and updating the display.
-   */
+  */
   function startTimer() {
     let timeLeft = 30;
     const timerElement = id('time');
     const timerId = setInterval(() => {
-      if (timeLeft <= 0 || totalMatches === 4) {
+      if (timeLeft <= 0 || totalMatches === FOUR) {
         clearInterval(timerId);
-        gameOver(totalMatches === 4);
+        gameOver(totalMatches === FOUR);
       } else {
         timeLeft -= 1;
         timerElement.textContent = timeLeft;
@@ -233,21 +236,21 @@
    * @param {*} success
    */
   function gameOver(success) {
-    id("cardContainer").style.display = 'none';
+    id("card-container").style.display = 'none';
     const feedback = id("feedback");
-    const artworkContainer = id("artworkContainer");
+    const artworkContainer = id("artwork-container");
     artworkContainer.style.display = 'block';
 
     if (success) {
       feedback.textContent = 'Congratulations! You matched all words correctly!';
-      fetchAmiiboCharacter("mario");
+      fetchAmiiboCharacter("Mario - Wedding");
     } else {
       feedback.textContent = 'Time up! Try again.';
       fetchAmiiboCharacter("bowser");
     }
   }
 
-  /**
+   /**
    * This function is in charge of fetching the amiibo character.
    * @param {*} characterName - either mario or bowser depending
    * if the user won or lost.
@@ -258,7 +261,7 @@
       .then(statusCheck)
       .then(res => res.json())
       .then(data => displayAmiiboCharacter(data.amiibo[0].image))
-      .catch(err => displayError("Failed to fetch character: " + err));
+      .catch(err => handleError("Failed to fetch character: " + err));
   }
 
   /**
@@ -266,7 +269,7 @@
    * @param {*} imgUrl
    */
   function displayAmiiboCharacter(imgUrl) {
-    const container = id("artworkContainer");
+    const container = id("artwork-container");
     container.innerHTML = "";
     let img = gen("img");
     img.src = imgUrl;

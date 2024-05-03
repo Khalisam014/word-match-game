@@ -18,12 +18,19 @@ a grid that is very game like. It is interactive.
 .word-card, .definition-card {
   border: 1px solid black;
   padding: 10px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s;
 }
 
-.word-card:hover {
+.word-card, .definition-card, button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+}
+
+.word-card, .definition-card, body, #artwork-container p {
+  text-align: center;
+}
+
+.word-card:hover, .definition-card:hover {
   background-color: #f0f0f0;
 }
 
@@ -35,35 +42,27 @@ a grid that is very game like. It is interactive.
   background-color: #f5f5f5;
 }
 
-.definition-card:hover {
-  background-color: #f0f0f0;
-}
-
 .error {
   color: red;
 }
 
 body {
   font-family: "Helvetica", "Verdana", sans-serif;
-  text-align: center;
   font-size: 12pt;
 }
 
-.title {
+.title, .waviy, h2, #rules p, #artwork-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+}
+
+.title {
   margin: 0;
 }
 
 .waviy {
-  text-transform: uppercase;
   font-size: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
 }
 
 .waviy {
@@ -76,7 +75,6 @@ body {
   display: inline-block;
   font-size: 50px;
   color: #020202;
-  text-transform: uppercase;
   animation: flip 4s infinite;
   margin-right: 50px;
 }
@@ -87,30 +85,27 @@ body {
   }
 }
 
-h2 {
-  text-transform: uppercase;
+h2, #details-bar {
   font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: line-through;
-
 }
 
-#rules {
+.waviy .letter, h2, #details-bar, #rules p, .waviy {
+  text-transform: uppercase;
+}
+
+h2 {
+  text-decoration: line-through;
+}
+
+#rules, .title, #artworkContainer{
   height: 100vh;
 }
 
 #rules p {
-  text-transform: uppercase;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 15px;
 }
 
 #details-bar {
-  font-size: 30px;
   margin-bottom: 50px;
   text-decoration: underline;
 }
@@ -121,26 +116,22 @@ button {
   border-radius: 20px;
   color: white;
   padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #f5ebe8;
 }
 
-#artworkContainer img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#artwork-container {
+  width: 100%;
 }
 
-#artworkContainer p {
-  text-align: center;
+#artwork-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+#artwork-container p {
   margin-top: 5px;
 }
 
@@ -148,6 +139,3 @@ button:hover {
   margin-top: 20px;
   font-size: 18px;
 }
-
-
-
