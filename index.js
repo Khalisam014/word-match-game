@@ -49,7 +49,7 @@
    */
   function populateWordGrid() {
     const words = ["leasing", "brobdingnagian", "quixotic", "lugubrious", "Pulchritude",
-                   "Maverick","sardonic", "Facetious", "Bombastic", "Easy", "Computer",
+                   "Maverick", "sardonic", "Facetious", "Bombastic", "Easy", "Computer",
                    "Unilateral", "Mango", "Rhythm", "Privilege", "Conscientious"];
     const container = id("word-selection-container");
     words.forEach(word => {
@@ -106,7 +106,6 @@
     });
   }
 
-
   /**
    *  This function is in charge of displaying the word and
    *  definition in a grid form.
@@ -118,6 +117,7 @@
     let wordCard = gen("div");
     wordCard.textContent = word;
     wordCard.className = "word-card";
+
     // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
     wordCard.dataset.definition = definition;
     wordCard.addEventListener("click", function() {
@@ -127,12 +127,10 @@
     let definitionCard = gen("div");
     definitionCard.textContent = definition;
     definitionCard.className = "definition-card";
-    // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
     definitionCard.dataset.definition = definition;
     definitionCard.addEventListener("click", function() {
       attemptMatch(definitionCard);
     });
-
     container.appendChild(wordCard);
     container.appendChild(definitionCard);
   }
@@ -198,9 +196,11 @@
   }
 
   /**
-   *
-   * @param {*} message
-   * @param {*} isError
+   * This function is called after handleError
+   * is called for the error to be more organized and
+   * displayed correctly.
+   * @param {*} message -  the message that is displayed when an error occurs
+   * @param {*} isError - if it is an error or not
    */
   function displayFeedback(message, isError) {
     const feedback = id("feedback");
@@ -213,21 +213,21 @@
   }
 
   /**
-  * This function is in charge of decrementing
-  * the timer and updating the display.
-  */
+   * This function is in charge of decrementing
+   * the timer and updating the display.
+   */
   function startTimer() {
     let timeLeft = 30;
     const timerElement = id('time');
     const timerId = setInterval(() => {
-      if (timeLeft <= 0 && totalMatches === FOUR) {
+      if (timeLeft <= 0 || totalMatches === FOUR) {
         clearInterval(timerId);
         gameOver(totalMatches === FOUR);
       } else {
         timeLeft -= 1;
         timerElement.textContent = timeLeft;
       }
-    }, 1000);
+    }, ONE_SECOND);
   }
 
   /**
@@ -282,8 +282,8 @@
   /**
    *  This function is a status check, testing edge cases
    *  and makes sure everything is functioning correctly.
-   * @param {*} response
-   * @returns
+   * @param {*} response -
+   * @returns {} -
    */
   function statusCheck(response) {
     if (!response.ok) {
