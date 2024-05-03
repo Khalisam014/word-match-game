@@ -1,7 +1,9 @@
 /**
- *
+ * Name: Sama Khalid
+ * This is the javascript file in charge of all of the
+ * user interactivity. Like the selecting the cards, matching
+ * up the cards, clicking start, etc.
  */
-
 "use strict";
 (function() {
 
@@ -32,7 +34,6 @@
   function startGame() {
     if (selectedWords.length !== FOUR) {
       handleError("Please select exactly 4 words.");
-      return;
     }
     id("word-selection-container").style.display = 'none';
     id("start-button").style.display = 'none';
