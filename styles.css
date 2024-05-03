@@ -23,7 +23,6 @@ a grid that is very game like. It is interactive.
 .word-card, .definition-card, button {
   cursor: pointer;
   transition: background-color 0.3s;
-
 }
 
 .word-card, .definition-card, body, #artwork-container p {
@@ -63,12 +62,8 @@ body {
 
 .waviy {
   font-size: 120px;
-}
-
-.waviy {
   font-weight: 700;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-  position: relative;
 }
 
 .waviy .letter {
@@ -81,7 +76,7 @@ body {
 
 @keyframes flip {
   0%,80% {
-    transform: rotateY(360deg)
+    transform: rotateY(360deg);
   }
 }
 
@@ -97,7 +92,7 @@ h2 {
   text-decoration: line-through;
 }
 
-#rules, .title, #artworkContainer{
+#rules, .title, #artworkContainer {
   height: 100vh;
 }
 
