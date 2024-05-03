@@ -184,7 +184,7 @@
    */
   function shuffleCards(container) {
     for (let i = container.children.length; i >= 0; i--) {
-      container.appendChild(container.children[Math.random() * i | 0]);
+      container.appendChild(container.children[Math.floor(Math.random() * i)]);
     }
   }
 
