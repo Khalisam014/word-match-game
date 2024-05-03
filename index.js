@@ -220,7 +220,6 @@
   function startTimer() {
     const timerElement = id('time');
     remainingSeconds = timerElement.textContent;
-    console.log(remainingSeconds);
     const timerId = setInterval(() => {
       if (remainingSeconds <= 0 || totalMatches === FOUR) {
         clearInterval(timerId);
