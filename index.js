@@ -15,7 +15,7 @@
   window.addEventListener("load", init);
   let totalMatches = 0;
   let selectedWords = [];
-  let remainingSeconds = 30;
+  let remainingSeconds;
   const FOUR = 4;
   const ONE_SECOND = 1000;
 
@@ -219,14 +219,13 @@
    */
   function startTimer() {
     const timerElement = id('time');
+    remainingSeconds = timerElement.textContent;
+    console.log(remainingSeconds);
     const timerId = setInterval(() => {
-      if (remainingSeconds <= 0) {
+      if (remainingSeconds <= 0 || totalMatches === 4) {
         clearInterval(timerId);
-        gameOver(totalMatches === FOUR)
+        gameOver(totalMatches === 4);
       } else {
-        if (totalMatches === FOUR) {
-          gameOver(totalMatches === FOUR);
-        }
         remainingSeconds -= 1;
         timerElement.textContent = remainingSeconds;
       }
